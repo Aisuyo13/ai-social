@@ -6,7 +6,7 @@ import Preloader from "../common/Preloader";
 import { ProfileType } from "../../redux/reducer/profile-reducer";
 
 type ProfilePropsType = {
-    profile: any
+    profile: ProfileType | null
     status: string
     setStatus: (status: string) => void
     setProfileData: (formData: ProfileType) => Promise<void>

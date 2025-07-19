@@ -2,8 +2,19 @@ import React, { useRef } from "react";
 import defaultUserPhoto from "../../assets/svg/avatar-default-svgrepo-com.svg";
 import ProfileStatus from './ProfileStatus'
 import s from './profile.module.css';
+import { ProfileType } from "../../redux/reducer/profile-reducer";
 
-const ProfileData = (props: any) => {
+type PropsType = {
+    setProfilePhoto: (file: File) => void
+    deleteProfilePhoto: () => void
+    profile: ProfileType
+    status: string
+    setStatus: (status: string) => void
+    goToEditMode: () => void
+    isOwner: boolean
+}
+
+const ProfileData = (props: PropsType) => {
 
     const fileInputRef = useRef<HTMLInputElement>(null);
 
@@ -13,9 +24,10 @@ const ProfileData = (props: any) => {
         }
     };
 
-    const handleFileChange = (e: any) => {
-        const file = e.target.files[0];
-        if (file) {
+    const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const files = e.target.files;
+        if (files && files.length > 0) {
+            const file = files[0];
             props.setProfilePhoto(file);
         }
     };
@@ -57,7 +69,7 @@ const ProfileData = (props: any) => {
             <div>
                 <h3>Контакты</h3>
                 <ul>
-                    {Object.entries(props.profile.contacts).map(([key, value]: [string, any]) => (
+                    {Object.entries(props.profile.contacts).map(([key, value]: [string, string | null]) => (
                         <li key={key}>
                             <strong>{key}:</strong> {value || "Нет информации"}
                         </li>

@@ -3,6 +3,7 @@ import { NavLink } from "react-router-dom"
 import { HeaderPropsType } from "./HeaderContainer"
 
 const Header = (props: HeaderPropsType) => {
+    
     return (
         <header className="header">
             <div className="container header__container">

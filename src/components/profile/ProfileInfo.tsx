@@ -5,7 +5,7 @@ import { ProfileType } from "../../redux/reducer/profile-reducer"
 
 type ProfileInfoPropsType = {
     isOwner: boolean
-    profile: ProfileType | null
+    profile: ProfileType
     status: string
     setStatus: (status: string) => void
     setProfilePhoto: (file: File) => void

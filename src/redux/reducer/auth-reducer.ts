@@ -50,7 +50,7 @@ export const login = (email: string, password: string, rememberMe: boolean) => {
     return async (dispatch: AppDispatchType) => {
         const res = await authApi.login(email, password, rememberMe)
         if (res.resultCode === 0) {
-            dispatch(loginAc({ id: res.data.id, email: res.data.email, login: res.data.login }));
+            dispatch(requestAuth());
         }
     }
 }
