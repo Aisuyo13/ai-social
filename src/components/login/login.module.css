@@ -1,0 +1,10 @@
+.loginForm {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+.error {
+    color: red;
+    font-size: 14px;
+    margin: 0;
+}

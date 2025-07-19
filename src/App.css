@@ -1,0 +1,29 @@
+* {
+    box-sizing: border-box;
+}
+
+.header {
+    padding: 10px;
+}
+
+.header__container{
+    display: flex;
+    align-items: center;
+}
+
+.header__logo {
+    max-width: 50px;
+    margin-right: 100px;
+}
+
+.header__nav-list {
+    list-style-type: none;
+    display: flex;
+    gap: 35px;
+    align-items: center;
+}
+
+.header__nav {
+    margin-right: auto;
+}
+

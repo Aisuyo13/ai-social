@@ -1,0 +1,11 @@
+.container {
+    display: flex;
+}
+
+.wrapper {
+    width: 50vh;
+}
+
+.dialogsList {
+    list-style-type: none;
+}

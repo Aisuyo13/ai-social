@@ -1,0 +1,16 @@
+.user_photo {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+  list-style-type: none;
+}
+
+.pagination_item {
+  padding: 10px;
+}
