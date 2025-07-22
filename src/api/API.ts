@@ -1,7 +1,7 @@
 import axios from "axios";
 import { AxiosResponse } from 'axios';
-import {ProfileType} from "../redux/reducer/profile-reducer";
-import {UserType} from "../redux/reducer/users-reducer";
+import {ProfileType} from "../redux/types"
+import {UserType} from "../redux/types"
 
 type APIResponseType<T> = {
     resultCode: number

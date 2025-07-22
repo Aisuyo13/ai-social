@@ -1,9 +1,9 @@
 import React from "react";
 import { Navigate } from "react-router-dom";
 import { connect } from "react-redux";
-import { GlobalStateType } from "../redux/redux-store";
+import { RootStateType } from "../redux/redux-store";
 
-const mapStateToProps = (state: GlobalStateType) => {
+const mapStateToProps = (state: RootStateType) => {
     return {
         isAuth: state.auth.isAuth,
     }

@@ -1,17 +1,17 @@
 import { NavLink } from "react-router-dom";
 import defaultPhoto from '../../assets/svg/avatar-default-svgrepo-com.svg'
 import s from './users.module.css'
-import {UserType} from "../../redux/reducer/users-reducer";
+import {UserType} from "../../redux/types"
 
-type PropsType = {
+type UsersPropsType = {
     users: Array<UserType>
     totalUsersCount: number
     followingProgress: Array<number>
     setUsers: (page: number, pageSize: number) => void
-    followUnfollowFlow: (user: UserType) => void
+    followUnfollowFlow: (userId: number) => void;
 }
 
-const Users = (props: PropsType) => {
+const Users = (props: UsersPropsType) => {
     return (
         <div>
             <h2>Users</h2>
@@ -30,10 +30,10 @@ const Users = (props: PropsType) => {
                         </NavLink>
                         {!user.followed
                             ? <button disabled={props.followingProgress.some((id: number) => id === user.id)}
-                            onClick={() => {props.followUnfollowFlow(user)}}>follow</button>
+                            onClick={() => {props.followUnfollowFlow(user.id)}}>follow</button>
                             
                             : <button disabled={props.followingProgress.some((id: number) => id === user.id)}
-                            onClick={() => {props.followUnfollowFlow(user)}}>unfollow</button>}
+                            onClick={() => {props.followUnfollowFlow(user.id)}}>unfollow</button>}
                     </div>
                 )
             })}

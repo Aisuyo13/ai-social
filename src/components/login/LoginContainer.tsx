@@ -1,24 +1,19 @@
 import React from "react";
-import { connect } from "react-redux";
+import { useAppSelector } from "../../redux/hooks";
 import Login from "./Login";
 import { Navigate } from "react-router-dom";
 import { login } from "../../redux/reducer/auth-reducer";
-import { getAuth } from "../../redux/selector/auth-selector";
-import { GlobalStateType } from "../../redux/redux-store";
+import { getAuth } from "../../redux/selector/auth-selector"
+import { useThunkWrap } from "../../redux/hooks";
 
-export type LoginPropsType = {
-    isAuth: boolean;
-    login: (email: string, password: string, rememberMe: boolean) => void
+const LoginContainer = () => {
+
+    const wrap = useThunkWrap();
+    const isAuth = useAppSelector(getAuth);
+
+    return isAuth
+        ? <Navigate to="/profile" />
+        : <Login login={wrap(login)} />
 }
 
-const LoginContainer = (props: LoginPropsType) => {
-    return props.isAuth ? <Navigate to="/profile" /> : <Login login={props.login} />
-}
-
-const mapStateToProps = (state: GlobalStateType) => {
-    return {
-        isAuth: getAuth(state),
-    };
-}
-
-export default connect(mapStateToProps, { login })(LoginContainer);
+export default LoginContainer

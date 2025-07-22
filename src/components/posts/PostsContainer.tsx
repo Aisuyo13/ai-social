@@ -1,16 +1,33 @@
-import React from "react";
-import Posts from "./Posts";
-import {connect} from "react-redux";
-// import {GlobalStateType} from "../../redux/redux-store";
+import React, { useEffect } from "react";
+import PostForm from './PostForm';
+import Posts from './Posts';
+import { requestPosts } from "../../redux/reducer/posts-reducer";
+import { useAppDispatch, useAppSelector } from "../../redux/hooks";
+import { getPosts } from "../../redux/selector/posts-selector";
 
-// let mapStateToProps = (state: GlobalStateType) => {
-//     return {
-//         postsGenerate: <state className="profile">{state.profile.posts.map((obj) => {
-//             return <div>{obj.text}</div>
-//         })}</state>
-//     }
-// }
+type PostsContainerPropsType = {
+    isOwner: boolean;
+}
 
-const PostsContainer = connect()(Posts)
+const PostsContainer = (props: PostsContainerPropsType) => {
+
+    const dispatch = useAppDispatch();
+
+    const id: number | undefined = useAppSelector(state => state.profile.profile?.userId)
+
+    useEffect(() => {
+        dispatch(requestPosts(id));
+    } , [dispatch, id]);
+
+    const posts = useAppSelector(getPosts)
+
+    return (
+        <div>
+            {props.isOwner && <PostForm />}
+            <Posts posts={posts} />
+        </div>
+    )
+
+}
 
 export default PostsContainer

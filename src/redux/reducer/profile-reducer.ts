@@ -1,32 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 import { profileApi } from "../../api/API"
 import {AppDispatchType} from "../redux-store"
-
-type ContactsType = {
-    github: string
-    vk: string
-    facebook: string
-    instagram: string
-    twitter: string
-    website: string
-    youtube: string
-    mainLink: string
-}
-
-type PhotosType = {
-    small: string | null
-    large: string | null
-}
-
-export type ProfileType = {
-    userId: number
-    lookingForAJob: boolean
-    lookingForAJobDescription: string | null
-    fullName: string
-    aboutMe: string | null
-    contacts: ContactsType
-    photos: PhotosType
-}
+import { ProfileType } from "../types"
 
 let initialState = {
     profile: null as ProfileType | null,

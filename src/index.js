@@ -1,12 +1,12 @@
-import React from 'react';
-import reportWebVitals from './reportWebVitals';
-import store from './redux/redux-store';
-import { Provider } from 'react-redux';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App.tsx';
+import React from 'react'
+import reportWebVitals from './reportWebVitals'
+import store from './redux/redux-store'
+import { Provider } from 'react-redux'
+import ReactDOM from 'react-dom/client'
+import './index.css'
+import App from './App.tsx'
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+const root = ReactDOM.createRoot(document.getElementById('root'))
 const render = () => {
   root.render(
     <React.StrictMode>

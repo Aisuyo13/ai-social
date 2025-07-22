@@ -1,9 +1,10 @@
-import React from "react";
+import React from "react"
 // import PostFormContainer from '../posts/PostFormContainer'
 // import PostsContainer from '../posts/PostsContainer'
 import ProfileInfo from './ProfileInfo'
-import Preloader from "../common/Preloader";
-import { ProfileType } from "../../redux/reducer/profile-reducer";
+import Preloader from "../common/Preloader"
+import { ProfileType } from "../../redux/types"
+import PostsContainer from "../posts/PostsContainer"
 
 type ProfilePropsType = {
     profile: ProfileType | null
@@ -29,7 +30,7 @@ const Profile = (props: ProfilePropsType) => {
                     setProfileData={props.setProfileData}
                     isOwner={props.isOwner}
                 />
-                {/* <PostsContainer/> */}
+                <PostsContainer isOwner={props.isOwner} />
             </div>
         )
     } else {

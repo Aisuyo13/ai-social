@@ -1,9 +1,9 @@
 import Messenger from "./Messenger";
 import { connect } from "react-redux";
 import withAuthRedirect from "../../hoc/withAuthRedirect";
-import { GlobalStateType } from "../../redux/redux-store";
+import { RootStateType } from "../../redux/redux-store";
 
-const mapStateToProps = (state: GlobalStateType) => {
+const mapStateToProps = (state: RootStateType) => {
     return {
         state: state.messenger
     }

@@ -1,17 +1,7 @@
-import { usersApi } from "../../api/API";
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import {AppDispatchType} from "../redux-store";
-
-export type UserType = {
-    id: number;
-    name: string;
-    followed: boolean;
-    status: string;
-    photos: {
-        small: string | null;
-        large: string | null;
-    };
-};
+import { usersApi } from "../../api/API"
+import { createSlice, PayloadAction } from "@reduxjs/toolkit"
+import {AppDispatchType, RootStateType} from "../redux-store"
+import { UserType } from "./../types"
 
 let initialState = {
     users: [] as Array<UserType>,
@@ -59,25 +49,30 @@ export const setUsers = (currentPage: number, pageSize?: number) => {
     }
 }
 
-export const followUnfollowFlow = (user: UserType) => {
-    return async (dispatch: AppDispatchType) =>  {
-        try {
-            dispatch(toggleFollowingProgressAc(user.id))
-            let res
-            if (!user.followed) {
-                res = await usersApi.follow(user.id)
-            }
-            if (user.followed) {
-                res = await usersApi.unfollow(user.id)
-            }
-            if (res && res.resultCode === 0) {
-                dispatch(followUnfollowFlowAc(user.id))
-            }
-            dispatch(toggleFollowingProgressAc(user.id))
-        } catch (error) {
-            console.error(error);
-        }
+export const followUnfollowFlow = (userId: number) => {
+  return async (dispatch: AppDispatchType, getState: () => RootStateType) => {
+    try {
+      dispatch(toggleFollowingProgressAc(userId));
+
+      const user = getState().users.users.find((u: UserType) => u.id === userId);
+      if (!user) throw new Error('User not found');
+
+      let res;
+      if (!user.followed) {
+        res = await usersApi.follow(userId);
+      } else {
+        res = await usersApi.unfollow(userId);
+      }
+
+      if (res?.resultCode === 0) {
+        dispatch(followUnfollowFlowAc(userId));
+      }
+
+      dispatch(toggleFollowingProgressAc(userId));
+    } catch (error) {
+      console.error(error);
     }
+  };
 }
 
 export const { setUsersAc, setTotalUsersCountAc, followUnfollowFlowAc, toggleFollowingProgressAc } = usersSlice.actions;

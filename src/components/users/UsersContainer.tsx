@@ -1,42 +1,35 @@
-import React, { useEffect } from "react";
-import { connect, ConnectedProps } from "react-redux";
-import Users from "./Users";
-import { GlobalStateType } from "../../redux/redux-store";
-import { setUsers, followUnfollowFlow } from "../../redux/reducer/users-reducer";
-import { getFollowingProgress, getPageCount, getTotalUsersCount, getUsers } from "../../redux/selector/users-selector";
+import React, { useEffect } from "react"
+import { useAppDispatch, useAppSelector } from "../../redux/hooks"
+import Users from "./Users"
+import { setUsers, followUnfollowFlow } from "../../redux/reducer/users-reducer"
+import { getFollowingProgress, getPageCount, getTotalUsersCount, getUsers } from "../../redux/selector/users-selector"
 
-const mapStateToProps = (state: GlobalStateType) => {
-    return {
-        users: getUsers(state),
-        totalUsersCount: getTotalUsersCount(state),
-        followingProgress: getFollowingProgress(state),
-        pageCount: getPageCount(state),
+const UsersContainer = () => {
+    const dispatch = useAppDispatch();
+    const users = useAppSelector(getUsers);
+    const totalUsersCount = useAppSelector(getTotalUsersCount);
+    const followingProgress = useAppSelector(getFollowingProgress);
+    const pageCount = useAppSelector(getPageCount);
+
+    const onSetUsers = (page: number, pageSize: number) => {
+        dispatch(setUsers(page, pageSize))
     }
-}
 
-const mapDispatchToProps = {
-    setUsers,
-    followUnfollowFlow
-}
-
-const connector = connect(mapStateToProps, mapDispatchToProps);
-type PropsFromRedux = ConnectedProps<typeof connector>;
-
-const UsersContainer = (props: PropsFromRedux) => {
-
-    const { pageCount, setUsers } = props;
+    const onFollowUnfollowFlow = (userId: number) => {
+        dispatch(followUnfollowFlow(userId))
+    }
 
     useEffect(() => {
-        setUsers(pageCount, 20);
-    }, [pageCount, setUsers]);
+        dispatch(setUsers(pageCount, 20))
+    }, [pageCount, dispatch])
 
     return <Users
-        users={props.users}
-        totalUsersCount={props.totalUsersCount}
-        followingProgress={props.followingProgress}
-        setUsers={props.setUsers}
-        followUnfollowFlow={props.followUnfollowFlow}
+        users={users}
+        totalUsersCount={totalUsersCount}
+        followingProgress={followingProgress}
+        setUsers={onSetUsers}
+        followUnfollowFlow={onFollowUnfollowFlow}
     />
 }
 
-export default connector(UsersContainer);
+export default UsersContainer

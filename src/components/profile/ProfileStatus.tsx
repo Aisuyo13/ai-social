@@ -6,10 +6,10 @@ type PropsType = {
     status: string
 }
 
-
 const defaultStatus = "No status"
 
 const ProfileStatus = (props: PropsType) => {
+    
     const [editMode, setEditMode] = useState(false);
     const [status, setStatus] = useState(props.status ?? defaultStatus);
 
@@ -36,10 +36,12 @@ const ProfileStatus = (props: PropsType) => {
     }
 
     return (
-        <div>
+        <div className="mb-4 p-2 w-[50%] bg-gray-100 rounded-xl">
             {editMode
-            ? <input onChange={onStatusChange} autoFocus={true} onBlur={toggleEditMode} value={status} />
-            : <span onDoubleClick={toggleEditMode}>{status || defaultStatus}</span>
+            ? <input className="w-full rounded-xl border bg-gray-100 border-gray-100 focus:outline-none focus:ring-0 transition"
+            onChange={onStatusChange} autoFocus={true} onBlur={toggleEditMode} value={status} />
+
+            : <span className="inline-block w-full rounded-xl" onDoubleClick={toggleEditMode}>{status || defaultStatus}</span>
             }
         </div>
     );

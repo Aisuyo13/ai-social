@@ -13,7 +13,7 @@ import Users from './components/users/UsersContainer';
 import Footer from './components/footer/Footer';
 import Login from './components/login/LoginContainer';
 import Preloader from './components/common/Preloader';
-import { GlobalStateType } from './redux/redux-store';
+import { RootStateType } from './redux/redux-store';
 
 type AppPropsType = {
   isInitialized: boolean;
@@ -30,8 +30,8 @@ const App = ({ isInitialized, requestAuth }: AppPropsType) => {
 
   return (
     <BrowserRouter>
-      <div>
-        <Header />
+      <Header />
+      <div className='className="container mx-auto px-16 pt-20'>
         <Routes>
           <Route path='/profile/:userId?' element={<Profile />} />
           <Route path='/messenger' element={<Messenger />} />
@@ -40,14 +40,14 @@ const App = ({ isInitialized, requestAuth }: AppPropsType) => {
           <Route path='/users' element={<Users />} />
           <Route path='/login' element={<Login />} />
         </Routes>
-        <Footer />
       </div>
+      <Footer />
     </BrowserRouter>
   );
   
 };
 
-const mapStateToProps = (state: GlobalStateType) => {
+const mapStateToProps = (state: RootStateType) => {
   return {
     isInitialized: state.app.isInitialized,
   }

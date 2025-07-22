@@ -4,6 +4,7 @@ import usersReducer from "./reducer/users-reducer";
 import messengerReducer from "./reducer/messenger-reducer";
 import authReducer from "./reducer/auth-reducer";
 import appReducer from "./reducer/app-reducer";
+import postsReducer from "./reducer/posts-reducer";
 
 const store = configureStore({
     reducer: {
@@ -12,11 +13,12 @@ const store = configureStore({
         messenger: messengerReducer,
         auth: authReducer,
         app: appReducer,
+        posts: postsReducer
     },
 })
 
 
-export type GlobalStateType = ReturnType<typeof store.getState>;
+export type RootStateType = ReturnType<typeof store.getState>;
 export type AppDispatchType = typeof store.dispatch;
 
 export default store

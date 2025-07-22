@@ -1,7 +1,7 @@
 import React, { useState } from "react"
 import ProfileData from './ProfileData'
 import ProfileForm from './ProfileForm'
-import { ProfileType } from "../../redux/reducer/profile-reducer"  
+import { ProfileType } from "../../redux/types"
 
 type ProfileInfoPropsType = {
     isOwner: boolean

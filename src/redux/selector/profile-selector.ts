@@ -1,9 +1,9 @@
-import { GlobalStateType } from "../redux-store";
-import {ProfileType} from "../reducer/profile-reducer";
+import { RootStateType } from "../redux-store";
+import {ProfileType} from "../types";
 
-export const getProfile = (state: GlobalStateType): ProfileType | null => {
+export const getProfile = (state: RootStateType): ProfileType | null => {
     return state.profile.profile;
 }
-export const getStatus = (state: GlobalStateType): string => {
+export const getStatus = (state: RootStateType): string => {
     return state.profile.status;
 }
